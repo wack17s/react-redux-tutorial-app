@@ -3,8 +3,8 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import User from '../components/User'
 import Page from '../components/Page'
-import * as pageActions from '../actions/PageActions'
-import * as userActions from '../actions/UserActions'
+import { getPhotos as pageActions } from '../modules/page'
+import { handleLogin as userActions } from '../modules/user'
 
 class App extends Component {
   render() {
@@ -19,14 +19,14 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps({ user, page }) {
   return {
-    user: state.user,
-    page: state.page
+    user,
+    page
   }
 }
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = (a, dispatch) => {
   return {
     pageActions: bindActionCreators(pageActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch)
