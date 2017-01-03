@@ -1,9 +1,30 @@
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCES,
-  LOGIN_FAIL
-} from '../constants/User'
+//constants
+const LOGIN_REQUEST = 'LOGIN_REQUEST'
+const LOGIN_SUCCES = 'LOGIN_SUCCES'
+const LOGIN_FAIL = 'LOGIN_FAIL'
 
+const initialState = {
+  name: '',
+  error: ''
+}
+
+//reducer
+export default function user(state = initialState, action) {
+
+  switch(action.type) {
+    case LOGIN_SUCCES:
+      return { ...state, name: action.payload, error: '' }
+
+    case LOGIN_FAIL:
+      return { ...state, error: action.payload.message }
+
+    default:
+      return state
+  }
+
+}
+
+//actions
 export function handleLogin() {
 
   return function(dispatch) {
